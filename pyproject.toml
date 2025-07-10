@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "termr"
+version = "1.0.1"
+description = "Terminal-based radio player with TUI"
+authors = [{name = "Sebastian Westberg", email = "sebastian@westberg.io"}]
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+keywords = ["radio", "terminal", "tui", "music", "streaming"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console :: Curses",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Sound/Audio :: Players",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "textual>=0.40.0",
+    "requests>=2.31.0",
+    "rich>=13.0.0",
+]
+
+[project.scripts]
+termr = "termr.main:main"
+
+[project.urls]
+Homepage = "https://github.com/Hibbins/termr"
+Repository = "https://github.com/Hibbins/termr"
+Issues = "https://github.com/Hibbins/termr/issues"
+Documentation = "https://github.com/Hibbins/termr#readme"
+
+[tool.setuptools.packages.find]
+include = ["termr*"]
+
+[tool.setuptools.package-data]
+termr = ["*.css"]
+
+[tool.setuptools.data-files]
+"share/man/man1" = ["termr.1"]

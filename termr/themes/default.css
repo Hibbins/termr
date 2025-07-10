@@ -1,0 +1,47 @@
+
+/* Default theme - Dark with blue accents */
+
+#search-input {
+    border: solid $primary;
+}
+
+#station-list, #favorites-list {
+    border: heavy $primary;
+}
+
+#status-bar {
+    color: $text;
+    border: heavy $primary;
+}
+
+DataTable {
+    color: $text;
+}
+
+DataTable > .datatable--header {
+    background: $primary;
+    color: $text;
+}
+
+DataTable > .datatable--cursor {
+    background: $accent;
+    color: $text;
+}
+
+DataTable > .datatable--row {
+    color: $text;
+}
+
+DataTable > .datatable--row:hover {
+    background: $primary-darken-1;
+}
+
+Header {
+    background: $primary;
+    color: $text;
+}
+
+Footer {
+    background: $primary;
+    color: $text;
+}

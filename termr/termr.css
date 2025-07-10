@@ -1,0 +1,157 @@
+#main {
+    layout: vertical;
+    margin: 3;
+}
+
+#search-input {
+    height: 3;
+    border: double $primary;
+    background: transparent;
+}
+
+#search-input.hidden {
+    display: none;
+}
+
+#station-list, #favorites-list {
+    height: 1fr;
+    border: double $primary;
+    padding: 3;
+}
+
+#station-list.hidden {
+    display: none;
+}
+
+#favorites-list.hidden {
+    display: none;
+}
+
+#status-bar {
+    height: 8;
+    color: $text;
+    align: center middle;
+    content-align: center middle;
+    border: double $primary;
+    margin-bottom: 1;
+    margin-top: 1;
+}
+
+DataTable {
+    background: transparent;
+    color: $text;
+}
+
+DataTable > .datatable--header {
+    background: $primary;
+    color: $text;
+    text-style: bold;
+}
+
+DataTable > .datatable--cursor {
+    background: $accent;
+    color: $text;
+}
+
+DataTable > .datatable--row {
+    background: transparent;
+    color: $text;
+}
+
+DataTable > .datatable--row:hover {
+    background: $primary-darken-1;
+}
+
+Header {
+    background: $primary;
+    color: $text;
+    text-style: bold;
+}
+
+Footer {
+    background: $primary;
+    color: $text;
+}
+
+#home-container.hidden {
+    display: none;
+}
+
+#home-container {
+    height: 1fr;
+    width: 1fr;
+    border: double $primary;
+    content-align: center middle;
+    align: center middle;
+    padding: 3;
+}
+
+#home-screen {
+    text-align: center;
+    background: transparent;
+    border: none;
+}
+
+MenuHeader {
+    height: auto;
+}
+
+Vertical {
+}
+
+OptionList {
+    background: transparent;
+    border: none;
+}
+
+OptionList > .option-list--option {
+    background: transparent;
+}
+
+OptionList > .option-list--option--highlighted {
+    background: transparent;
+    text-style: reverse;
+}
+
+OptionList,
+.OptionList--option,
+.option-list--option {
+    text-align: center;
+    align: center middle;
+}
+
+#theme-container {
+    height: 1fr;
+    width: 1fr;
+    border: double $primary;
+    content-align: center middle;
+    align: center middle;
+}
+
+#theme-container.hidden {
+    display: none;
+}
+
+#theme-selection {
+    content-align: center middle;
+    width: 100%;
+    background: transparent;
+    border: none;
+}
+
+#help-container {
+    height: 1fr;
+    width: 1fr;
+    border: double $primary;
+    content-align: center middle;
+}
+
+#help-container.hidden {
+    display: none;
+}
+
+#help-screen {
+    text-align: center;
+    background: transparent;
+    border: none;
+}

@@ -1,0 +1,66 @@
+
+/* Light theme - Light background with dark text */
+
+* {
+    background: #ecf0f1;
+}
+
+#ascii-logo {
+    background: #ecf0f1;
+    color: #2c3e50;
+}
+
+#search-input {
+    border: solid #2c3e50;
+    background: #ecf0f1;
+    color: #2c3e50;
+}
+
+#station-list, #favorites-list {
+    border: heavy #2c3e50;
+    background: #ecf0f1;
+    color: #2c3e50;
+}
+
+#status-bar {
+    color: #2c3e50;
+    border: heavy #2c3e50;
+    background: #ecf0f1;
+}
+
+DataTable {
+    color: #2c3e50;
+}
+
+DataTable > .datatable--header {
+    background: #3498db;
+    color: white;
+}
+
+DataTable > .datatable--cursor {
+    background: #e74c3c;
+    color: white;
+}
+
+DataTable > .datatable--row {
+    color: #2c3e50;
+}
+
+DataTable > .datatable--row:hover {
+    background: #bdc3c7;
+}
+
+Header {
+    background: #3498db;
+    color: white;
+}
+
+Footer {
+    background: #3498db;
+    color: white;
+}
+
+#home-container {
+    background: #ecf0f1;
+    color: #2c3e50;
+}

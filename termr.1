@@ -1,0 +1,97 @@
+.TH TERMR 1 "2025" "Termr v1.0.0" "User Commands"
+
+.SH NAME
+termr \- Terminal-based radio player with TUI
+
+.SH SYNOPSIS
+.B termr
+[\fIOPTIONS\fR]
+
+.SH DESCRIPTION
+Termr is a terminal-based radio player with a text user interface (TUI).
+It allows you to browse and play radio stations from the Radio Browser API.
+
+.SH OPTIONS
+.TP
+.B \-h, \-\-help
+Show help message and exit
+
+.TP
+.B \-v, \-\-version
+Show version and exit
+
+.SH CONTROLS
+.TP
+.B Arrow Keys
+Navigate through station list
+
+.TP
+.B Enter
+Play selected station
+
+.TP
+.B p
+Pause/resume playback
+
+.TP
+.B s
+Stop playback
+
+.TP
+.B f
+Add/remove station from favorites
+
+.TP
+.B r
+Play random station
+
+.TP
+.B Tab
+Switch between stations and favorites views
+
+.TP
+.B q
+Quit application
+
+.SH CONFIGURATION
+Configuration files are stored in \fI~/.config/termr/\fR:
+
+.TP
+.B favorites.json
+List of favorite stations
+
+.TP
+.B settings.json
+Application settings
+
+.SH DEPENDENCIES
+.TP
+.B VLC
+Required for audio playback (cvlc command must be available)
+
+.SH EXAMPLES
+.TP
+.B Start termr:
+termr
+
+.TP
+.B Show help:
+termr --help
+
+.SH FILES
+.TP
+.B ~/.config/termr/favorites.json
+Favorite stations configuration
+
+.TP
+.B ~/.config/termr/settings.json
+Application settings
+
+.SH AUTHOR
+Written by Sebastian Westberg <sebastian@westberg.io>
+
+.SH BUGS
+Report bugs to: https://github.com/Hibbins/termr/issues
+
+.SH COPYRIGHT
+Copyright © 2025 Sebastian Westberg. License MIT.

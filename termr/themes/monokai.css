@@ -1,0 +1,85 @@
+/* Monokai theme - Dark with bright colors */
+
+* {
+    background: #272822;
+}
+
+#ascii-logo {
+    background: #272822;
+    color: #f8f8f2;
+}
+
+#search-input {
+    border: solid #f92672;
+    background: #272822;
+    color: #f8f8f2;
+}
+
+#search-input.hidden {
+    display: none;
+}
+
+#station-list, #favorites-list {
+    border: heavy #f92672;
+    background: #272822;
+    color: #f8f8f2;
+}
+
+#station-list.hidden {
+    display: none;
+}
+
+#favorites-list.hidden {
+    display: none;
+}
+
+#status-bar {
+    color: #f8f8f2;
+    border: heavy #f92672;
+    background: #272822;
+}
+
+DataTable {
+    color: #f8f8f2;
+}
+
+DataTable > .datatable--header {
+    background: #75715e;
+    color: #f8f8f2;
+}
+
+DataTable > .datatable--cursor {
+    background: #a6e22e;
+    color: #272822;
+}
+
+DataTable > .datatable--row {
+    color: #f8f8f2;
+}
+
+DataTable > .datatable--row:hover {
+    background: #3e3d32;
+}
+
+Header {
+    background: #75715e;
+    color: #f8f8f2;
+}
+
+Footer {
+    background: #75715e;
+    color: #f8f8f2;
+}
+
+#home-container.hidden {
+    display: none;
+}
+
+#home-container {
+    background: #272822;
+    color: #f8f8f2;
+}
+
+MenuHeader {
+    height: auto;
+}

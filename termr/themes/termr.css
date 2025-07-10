@@ -1,0 +1,77 @@
+/* Base layout and structure for all themes */
+
+Screen, #main, Vertical {
+    height: 1fr;
+    width: 1fr;
+    margin: 0;
+    padding: 0;
+}
+
+#ascii-logo {
+    width: 100%;
+    height: auto;
+    min-height: 5;
+    margin: 0;
+    padding: 0;
+    align: center middle;
+    content-align: center middle;
+}
+
+#main {
+    layout: vertical;
+}
+
+#search-input {
+    height: 3;
+    margin: 1;
+}
+
+#search-input.hidden {
+    display: none;
+}
+
+#station-list, #favorites-list {
+    height: 1fr;
+}
+
+#station-list.hidden {
+    display: none;
+}
+
+#favorites-list.hidden {
+    display: none;
+}
+
+#status-bar {
+    height: 8;
+    align: center middle;
+    content-align: center middle;
+}
+
+DataTable {
+    background: transparent;
+}
+
+DataTable > .datatable--header {
+    text-style: bold;
+}
+
+DataTable > .datatable--row {
+    background: transparent;
+}
+
+Header {
+    text-style: bold;
+}
+
+#home-container.hidden {
+    display: none;
+}
+
+#home-container {
+    height: 1fr;
+}
+
+MenuHeader {
+    height: auto;
+}

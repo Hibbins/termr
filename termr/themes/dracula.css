@@ -1,0 +1,66 @@
+
+/* Dracula theme - Dark purple */
+
+* {
+    background: #282a36;
+}
+
+#ascii-logo {
+    background: #282a36;
+    color: #f8f8f2;
+}
+
+#search-input {
+    border: solid #bd93f9;
+    background: #282a36;
+    color: #f8f8f2;
+}
+
+#station-list, #favorites-list {
+    border: heavy #bd93f9;
+    background: #282a36;
+    color: #f8f8f2;
+}
+
+#status-bar {
+    color: #f8f8f2;
+    border: heavy #bd93f9;
+    background: #282a36;
+}
+
+DataTable {
+    color: #f8f8f2;
+}
+
+DataTable > .datatable--header {
+    background: #44475a;
+    color: #f8f8f2;
+}
+
+DataTable > .datatable--cursor {
+    background: #ff79c6;
+    color: #282a36;
+}
+
+DataTable > .datatable--row {
+    color: #f8f8f2;
+}
+
+DataTable > .datatable--row:hover {
+    background: #44475a;
+}
+
+Header {
+    background: #44475a;
+    color: #f8f8f2;
+}
+
+Footer {
+    background: #44475a;
+    color: #f8f8f2;
+}
+
+#home-container {
+    background: #282a36;
+    color: #f8f8f2;
+}

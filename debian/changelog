@@ -1,0 +1,11 @@
+termr (1.0.0-1) all; urgency=medium
+
+  * Initial release
+  * Terminal-based radio player with TUI
+  * Radio Browser API integration
+  * VLC-based audio playback
+  * Favorite station management
+  * Cross-platform support
+
+ -- Sebastian Westberg <sebastian@westberg.io>  $(date -R)
+ 
