@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "termr"
-version = "1.0.1"
+version = "1.0.0"
 description = "Terminal-based radio player with TUI"
 authors = [{name = "Sebastian Westberg", email = "sebastian@westberg.io"}]
 readme = "README.md"
