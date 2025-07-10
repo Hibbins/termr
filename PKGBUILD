@@ -20,9 +20,6 @@ package() {
     cd "$srcdir/$pkgname-$pkgver"
     python -m installer --destdir="$pkgdir" dist/*.whl
     
-    # Create desktop entry
-    install -Dm644 "$srcdir/$pkgname-$pkgver/termr.desktop" "$pkgdir/usr/share/applications/termr.desktop"
-    
     # Create man page
     install -Dm644 "$srcdir/$pkgname-$pkgver/termr.1" "$pkgdir/usr/share/man/man1/termr.1"
 }
