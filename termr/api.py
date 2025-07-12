@@ -121,6 +121,35 @@ class RadioBrowserAPI:
     def get_popular_stations(self, limit: int = 100) -> List[RadioStation]:
         return self.search_stations(limit=limit, order_by="clickcount")
 
+    def get_station_by_id(self, station_id: str) -> RadioStation:
+        """Get a specific station by its ID."""
+        try:
+            response = self.session.get(
+                f"{self.BASE_URL}/stations/byuuid/{station_id}",
+                timeout=self.timeout
+            )
+            response.raise_for_status()
+            data = response.json()
+            
+            if data:
+                item = data[0] if isinstance(data, list) else data
+                return RadioStation(
+                    id=item.get("stationuuid", ""),
+                    name=item.get("name", ""),
+                    url=item.get("url", ""),
+                    bitrate=item.get("bitrate", 0),
+                    codec=item.get("codec", ""),
+                    country=item.get("country", ""),
+                    language=item.get("language", ""),
+                    tags=item.get("tags", ""),
+                    favicon=item.get("favicon", ""),
+                    votes=item.get("votes", 0),
+                    click_count=item.get("clickcount", 0)
+                )
+            return None
+        except requests.RequestException:
+            return None
+
     def is_available(self) -> bool:
         try:
             response = self.session.get(f"{self.BASE_URL}/stations/search", params={"limit": 1}, timeout=self.timeout)
