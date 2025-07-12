@@ -12,6 +12,7 @@ from .player import VLCPlayer
 from .favorites import FavoritesManager
 from .config import Config
 from .themes import THEMES
+from .version import __version__
 
 
 class StationList(DataTable):
@@ -141,7 +142,7 @@ class AsciiLogo(Static):
     def render(self) -> str:
         width = self.size.width if hasattr(self, 'size') and self.size else 80
         art = "\n".join(line.center(width) for line in self.ASCII)
-        version = "Version: 1.0.0".center(width)
+        version = f"Version: {__version__}".center(width)
         return f"{art}\n{version}\n"
 
 

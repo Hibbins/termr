@@ -4,6 +4,7 @@
 import sys
 import argparse
 from .ui import TermrApp
+from .version import __version__
 
 
 def check_dependencies() -> bool:
@@ -52,7 +53,7 @@ Controls:
     parser.add_argument(
         "-v", "--version",
         action="version",
-        version="termr 1.0.0"
+        version=f"termr {__version__}"
     )
     
     return parser.parse_args()

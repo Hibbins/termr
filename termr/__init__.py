@@ -1,4 +1,6 @@
 """termr - A TUI-based radio player."""
 
-__version__ = "1.0.0"
+from .version import __version__
+
+__version__ = __version__
 __author__ = "Sebastian Westberg" 

@@ -1,6 +1,7 @@
 import requests
 from typing import List
 from .models import RadioStation
+from .version import __version__
 
 
 class RadioBrowserAPI:
@@ -9,7 +10,7 @@ class RadioBrowserAPI:
     def __init__(self, timeout: int = 10):
         self.session = requests.Session()
         self.session.headers.update({
-            "User-Agent": "termr/1.0.0"
+            "User-Agent": f"termr/{__version__}"
         })
         self.timeout = timeout
 

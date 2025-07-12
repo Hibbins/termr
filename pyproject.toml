@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "termr"
-version = "1.0.0"
+dynamic = ["version"]
 description = "Terminal-based radio player with TUI"
 authors = [{name = "Sebastian Westberg", email = "sebastian@westberg.io"}]
 readme = "README.md"
@@ -49,3 +49,6 @@ termr = ["*.css"]
 
 [tool.setuptools.data-files]
 "share/man/man1" = ["termr.1"]
+
+[tool.setuptools.dynamic]
+version = {attr = "termr.version.__version__"}
