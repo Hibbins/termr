@@ -82,7 +82,7 @@ Footer {
     width: 1fr;
     border: double $primary;
     content-align: center middle;
-    align: center middle;
+    align: center top;
     padding: 3;
 }
 
@@ -94,9 +94,6 @@ Footer {
 
 MenuHeader {
     height: auto;
-}
-
-Vertical {
 }
 
 OptionList {
@@ -117,15 +114,16 @@ OptionList,
 .OptionList--option,
 .option-list--option {
     text-align: center;
-    align: center middle;
+    align: center top;
 }
 
 #theme-container {
     height: 1fr;
     width: 1fr;
+    padding: 3;
     border: double $primary;
     content-align: center middle;
-    align: center middle;
+    align: center top;
 }
 
 #theme-container.hidden {
