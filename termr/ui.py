@@ -488,6 +488,11 @@ class TermrApp(App):
             self.search_input.add_class("hidden")
             self.search_input.value = ""
             self.showing_search = False
+
+            # Restore original station list when search is closed
+            if self.current_view == "stations" and self.station_list and self.stations:
+                self.station_list.load_stations(self.stations)
+            
             current_list = self.favorites_list if self.current_view == "favorites" else self.station_list
             if current_list:
                 current_list.focus()
