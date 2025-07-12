@@ -9,7 +9,7 @@ class RadioBrowserAPI:
     def __init__(self, timeout: int = 10):
         self.session = requests.Session()
         self.session.headers.update({
-            "User-Agent": "termr/0.1.0"
+            "User-Agent": "termr/1.0.0"
         })
         self.timeout = timeout
 

@@ -52,7 +52,7 @@ Controls:
     parser.add_argument(
         "-v", "--version",
         action="version",
-        version="termr 0.1.0"
+        version="termr 1.0.0"
     )
     
     return parser.parse_args()
