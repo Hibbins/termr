@@ -79,8 +79,8 @@ makepkg -si
 
 ```bash
 # Download and install
-wget https://github.com/Hibbins/termr/releases/download/v1.0.0/termr_1.0.0-1_all.deb
-sudo apt install ./termr_1.0.0-1_all.deb
+wget https://github.com/Hibbins/termr/releases/download/v1.1.0/termr_1.1.0-1_all.deb
+sudo apt install ./termr_1.1.0-1_all.deb
 ```
 
 #### From PyPI
@@ -122,7 +122,7 @@ Switch between multiple color themes from the menu for the best TUI experience.
 
 #### Keyboard Shortcuts
 
-| Key         | Action                        |
+| Key         | Action                       |
 |-------------|------------------------------|
 | `q`         | Quit                         |
 | `h`         | Home                         |
@@ -131,7 +131,7 @@ Switch between multiple color themes from the menu for the best TUI experience.
 | `+` / `-`   | Volume Up/Down               |
 | `p`         | Pause/Resume                 |
 | `x`         | Stop                         |
-| `tab`       | Switch View (stations/favs)  |
+| `r`         | Refresh station list         |
 | `escape`    | Back                         |
 | `enter`     | Play selected station        |
 
