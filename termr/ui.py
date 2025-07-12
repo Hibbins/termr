@@ -63,7 +63,7 @@ class StationList(DataTable):
         row_key = self.get_row_key_for_station(station_id)
         column_key = 'Name'
         if row_key is None:
-            self.app.notify("Ingen rad hittades för station_id")
+            self.app.notify("No row found for station_id")
             return
         for station in self.stations:
             if station.id == station_id:
@@ -220,6 +220,7 @@ class TermrApp(App):
         Binding("-", "volume_down", "Vol down"),
         Binding("escape", "go_back", "Back"),
         Binding("h", "show_home", "Home"),
+        Binding("r", "refresh_stations", "Refresh"),
     ]
 
     def __init__(self):
@@ -284,7 +285,6 @@ class TermrApp(App):
             self.status_bar.update_status(self.player.get_status(), self.volume)
         if self.search_input:
             self.search_input.add_class("hidden")
-        self.load_stations()
         self.load_favorites()
         self.current_view = None
         self.apply_theme(self._active_theme)
@@ -365,9 +365,10 @@ class TermrApp(App):
             self.theme = theme_name
 
     @work(thread=True)
-    def load_stations(self) -> None:
-        if not self.api.is_available():
-            return
+    def load_stations(self, for_favorites: bool = False) -> None:
+        """Load stations with retry mechanism and better error handling."""
+        max_retries = 3
+        retry_delay = 2
         
         def show_loading():
             if self.status_bar:
@@ -377,19 +378,73 @@ class TermrApp(App):
             if self.status_bar:
                 self.status_bar.update_status(self.player.get_status(), self.volume, loading_message=None)
         
+        def show_error(message: str):
+            if self.status_bar:
+                self.status_bar.update_status(self.player.get_status(), self.volume, loading_message=message)
+        
         self.call_from_thread(show_loading)
-        max_stations = self.config.get("max_stations", 100)
-        sort_by = self.config.get("default_sort", "clickcount")
-        stations = self.api.search_stations(limit=max_stations, order_by=sort_by)
+        
+        stations = []
+        for attempt in range(max_retries):
+            try:
+                if not self.api.is_available():
+                    if attempt == 0:
+                        self.call_from_thread(lambda: show_error("API not available, retrying..."))
+                    import time
+                    time.sleep(retry_delay)
+                    continue
+                
+                max_stations = self.config.get("max_stations", 100)
+                sort_by = self.config.get("default_sort", "clickcount")
+                stations = self.api.search_stations(limit=max_stations, order_by=sort_by)
+                
+                if stations:
+                    break
+                else:
+                    if attempt < max_retries - 1:
+                        self.call_from_thread(lambda: show_error(f"No stations found, retrying... (attempt {attempt + 1}/{max_retries})"))
+                        import time
+                        time.sleep(retry_delay)
+                    else:
+                        self.call_from_thread(lambda: show_error("Failed to load stations after multiple attempts"))
+                        return
+                        
+            except Exception as e:
+                if attempt < max_retries - 1:
+                    self.call_from_thread(lambda: show_error(f"Error loading stations, retrying... (attempt {attempt + 1}/{max_retries})"))
+                    import time
+                    time.sleep(retry_delay)
+                else:
+                    self.call_from_thread(lambda: show_error(f"Failed to load stations: {str(e)}"))
+                    return
+        
+        # Update stations and UI
         self.stations = stations
         
         def update_ui():
             if self.station_list:
                 self.station_list.load_stations(stations)
+                if self.current_view == "stations" and not self.station_list.has_class("hidden"):
+                    self.station_list.focus()
             self.load_favorites()
-            hide_loading()
+            
+            if stations:
+                if for_favorites:
+                    favorite_count = len([s for s in stations if self.favorites_manager.is_favorite(s.id)])
+                    self.update_status(loading_message=f"Loaded {favorite_count} favorites")
+                else:
+                    self.update_status(loading_message=f"Loaded {len(stations)} stations")
+                self.call_after_refresh(lambda: self._clear_loading_message_after_delay())
+            else:
+                hide_loading()
         
         self.call_from_thread(update_ui)
+
+    @work(thread=True)
+    def _clear_loading_message_after_delay(self) -> None:
+        import time
+        time.sleep(3.0)
+        self.call_from_thread(lambda: self.update_status(loading_message=None))
 
     @work(thread=True)
     def search_stations(self, query: str) -> None:
@@ -579,12 +634,19 @@ class TermrApp(App):
         self.station_list.remove_class("hidden")
         self.station_list.focus()
         self.current_view = "stations"
+        
+        # Always load stations when user selects Stations from menu
+        self.load_stations()
 
     def show_favorites_list(self):
         self.home_container.add_class("hidden")
         self.favorites_list.remove_class("hidden")
         self.favorites_list.focus()
         self.current_view = "favorites"
+        
+        # Load stations if not already loaded (needed for favorites)
+        if not self.stations:
+            self.load_stations(for_favorites=True)
 
     def action_show_home(self):
         self.home_container.remove_class("hidden")
@@ -616,6 +678,12 @@ class TermrApp(App):
         self.favorites_list.add_class("hidden")
         self.help_screen.focus()
         self.current_view = "help"
+
+    def action_refresh_stations(self) -> None:
+        """Refresh the stations list."""
+        if self.current_view == "stations":
+            self.update_status(loading_message="Refreshing stations...")
+            self.load_stations()
 
     def action_go_back(self) -> None:
         if self.current_view in ("theme", "help"):
