@@ -1,11 +1,27 @@
 """Tests for Textual UI components."""
 
 import pytest
+import tempfile
+from pathlib import Path
 from unittest.mock import Mock, patch
 from textual.app import App
 
 from termr.ui import TermrApp, StationList
 from termr.models import RadioStation
+
+
+@pytest.fixture
+def temp_config_dir():
+    """Create temporary config directory."""
+    with tempfile.TemporaryDirectory() as temp_dir:
+        yield Path(temp_dir)
+
+
+@pytest.fixture
+def mock_config_dir(temp_config_dir):
+    """Mock the config directory to use temporary directory."""
+    with patch.object(TermrApp, 'get_config_dir', return_value=temp_config_dir):
+        yield temp_config_dir
 
 
 @pytest.fixture
@@ -90,16 +106,16 @@ def test_station_list_populate_method(mock_app, sample_stations):
 
 
 @patch('termr.ui.TermrApp.run')
-def test_termr_app_initialization(mock_run):
+def test_termr_app_initialization(mock_run, mock_config_dir):
     """Test TermrApp initialization."""
     app = TermrApp()
     
     assert app.stations == []
     assert app.favorites_manager is not None
-    assert app._active_theme == "light"  # Default theme is light
+    assert app._active_theme == "default"
 
 
-def test_termr_app_theme_application():
+def test_termr_app_theme_application(mock_config_dir):
     """Test theme application."""
     app = TermrApp()
     
@@ -114,7 +130,7 @@ def test_termr_app_theme_application():
     assert app._active_theme == "light"
 
 
-def test_termr_app_invalid_theme():
+def test_termr_app_invalid_theme(mock_config_dir):
     """Test handling of invalid theme."""
     app = TermrApp()
     original_theme = app._active_theme
@@ -124,7 +140,7 @@ def test_termr_app_invalid_theme():
     assert app._active_theme == original_theme
 
 
-def test_termr_app_view_switching():
+def test_termr_app_view_switching(mock_config_dir):
     """Test switching between views."""
     app = TermrApp()
     
