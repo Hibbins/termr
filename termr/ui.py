@@ -64,7 +64,6 @@ class StationList(DataTable):
         row_key = self.get_row_key_for_station(station_id)
         column_key = 'Name'
         if row_key is None:
-            self.app.notify("No row found for station_id")
             return
         for station in self.stations:
             if station.id == station_id:
@@ -372,7 +371,7 @@ class TermrApp(App):
         retry_delay = 2
         
         def show_loading():
-            if self.status_bar:
+            if self.status_bar and not for_favorites:
                 self.status_bar.update_status(self.player.get_status(), self.volume, loading_message="Loading stations...")
         
         def hide_loading():
@@ -430,12 +429,11 @@ class TermrApp(App):
             self.load_favorites()
             
             if stations:
-                if for_favorites:
-                    favorite_count = len([s for s in stations if self.favorites_manager.is_favorite(s.id)])
-                    self.update_status(loading_message=f"Loaded {favorite_count} favorites")
-                else:
+                if not for_favorites:
                     self.update_status(loading_message=f"Loaded {len(stations)} stations")
-                self.call_after_refresh(lambda: self._clear_loading_message_after_delay())
+                    self.call_after_refresh(lambda: self._clear_loading_message_after_delay())
+                else:
+                    hide_loading()
             else:
                 hide_loading()
         
@@ -509,22 +507,10 @@ class TermrApp(App):
         self.call_from_thread(update_ui)
 
     def load_favorites(self) -> None:
-        favorite_ids = self.favorites_manager.get_favorites()
-        
-        # Find favorites in current stations list
-        self.favorites = [s for s in self.stations if s.id in favorite_ids]
-        
-        # Find favorites in search results if different from main list
-        if self.station_list and self.station_list.stations and self.station_list.stations != self.stations:
-            search_favorites = [s for s in self.station_list.stations if s.id in favorite_ids]
-            for station in search_favorites:
-                if station.id not in [f.id for f in self.favorites]:
-                    self.favorites.append(station)
-        
-        # Find missing favorites from API
-        missing_favorites = [fid for fid in favorite_ids if fid not in [f.id for f in self.favorites]]
-        if missing_favorites:
-            self._load_missing_favorites(missing_favorites)
+        # Ensure migration is done if needed
+        self.favorites_manager.ensure_migration(api=self.api)     
+
+        self.favorites = self.favorites_manager.get_favorites()
         
         if self.favorites_list:
             self.favorites_list.load_stations(self.favorites)
@@ -600,7 +586,7 @@ class TermrApp(App):
             self.favorites_manager.remove_favorite(station.id)
             message = f"Removed {station.name} from favorites"
         else:
-            self.favorites_manager.add_favorite(station.id)
+            self.favorites_manager.add_favorite(station)
             message = f"Added {station.name} to favorites"
         self.load_favorites()
         current_list.update_favorite_indicator(station.id, self.favorites_manager.is_favorite(station.id))
