@@ -79,8 +79,8 @@ makepkg -si
 
 ```bash
 # Download and install
-wget https://github.com/Hibbins/termr/releases/download/v1.1.0/termr_1.1.0-1_all.deb
-sudo apt install ./termr_1.1.0-1_all.deb
+wget https://github.com/Hibbins/termr/releases/download/v1.2.0/termr_1.2.0-1_all.deb
+sudo apt install ./termr_1.2.0-1_all.deb
 ```
 
 #### From PyPI
