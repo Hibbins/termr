@@ -56,6 +56,9 @@
 - Minimal dependencies, easy to install
 - Configurable and hackable
 
+<img width="1332" height="1030" alt="termr_screenshot" src="https://github.com/user-attachments/assets/4e486f58-bf67-4909-927f-27fba600e65d" />
+
+
 ## Installation
 
 ### Linux
