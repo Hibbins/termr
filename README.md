@@ -66,9 +66,6 @@
 #### Arch Linux (AUR)
 
 ```bash
-# With pacman
-sudo pacman -S termr
-
 # With yay
 yay -S termr
 
