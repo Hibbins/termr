@@ -5,7 +5,7 @@ from .version import __version__
 
 
 class RadioBrowserAPI:
-    BASE_URL = "https://de1.api.radio-browser.info/json"
+    BASE_URL = "https://de2.api.radio-browser.info/json"
 
     def __init__(self, timeout: int = 10):
         self.session = requests.Session()
